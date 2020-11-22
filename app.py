@@ -6,12 +6,19 @@ import requests
 from selenium import webdriver
 
 
-# Change this to your Firefox webdriver location
-driver = webdriver.Firefox(executable_path=r"C:\\webdriver\\geckodriver.exe")
-
-# Change this to your info
+# Change to your account login information.
 username = ""
 password = ""
+
+# Global variables
+max_likes = int(input('Enter amount of likes to perform: '))
+print(
+    f'Okay! I will like {max_likes} photo(s).')
+liked_photos = 0
+
+
+# Change this to your Firefox webdriver locationF
+driver = webdriver.Firefox(executable_path=r"C:\\webdriver\\geckodriver.exe")
 
 
 def login():
@@ -43,7 +50,14 @@ def login():
     explore()
 
 
+def ask_user():
+    global max_likes
+    max_likes = int(input('Okay. Enter new amount of likes to perform: '))
+
+
 def explore():
+    global max_likes
+    global liked_photos
     driver.get('https://www.instagram.com/explore/')
     sleep(6)
     pics = driver.find_elements_by_class_name('eLAPa')
@@ -62,7 +76,15 @@ def explore():
         likeButton.click()
         print("Liked picture")
         sleep(randint(3, 6))
-        print('Refreshing page for new content.')
+        liked_photos += 1
+        print(f"Liked {liked_photos} photos")
+        if liked_photos >= max_likes:
+            ask_quit_or_not = input('Would you like to quit? y/n ')
+            if ask_quit_or_not == 'y':
+                driver.quit()
+            elif ask_quit_or_not == 'n':
+                ask_user()
+                explore()
     explore()
 
 
