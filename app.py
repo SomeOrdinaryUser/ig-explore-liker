@@ -49,20 +49,21 @@ def explore():
     pics = driver.find_elements_by_class_name('eLAPa')
     pics = pics[16:17]
     for pic in pics:
-        sleep(randint(3, 6))
-        print("Clicking first unique picture")
-        sleep(randint(5, 9))
+        sleep(randint(3, 16))
+        sleep(randint(5, 19))
         pic.click()
-        sleep(randint(3, 6))
+        print("Clicked picture.")
+        sleep(randint(3, 16))
 
         # Like photo
-        print("Like picture")
-        sleep(randint(3, 6))
+        sleep(randint(3, 16))
         likeButton = driver.find_element_by_class_name('fr66n')
-        sleep(randint(6, 12))
+        sleep(randint(6, 15))
         likeButton.click()
-        sleep(randint(15, 20))
-        explore()
+        print("Liked picture")
+        sleep(randint(3, 6))
+        print('Refreshing page for new content.')
+    explore()
 
 
 if __name__ == "__main__":
