@@ -1,3 +1,2 @@
 # ig-explore-liker
-
-Change your username and password in app.py
+![download](https://i.imgur.com/UlRBJTD.png)
